@@ -25,8 +25,9 @@ const getTweet = async (id: string) => {
   return data;
 };
 
-export default async function Page({ params }: { params: { postid: string } }) {
-  const tweet: Tweet = await getTweet(params.postid);
+export default async function Page({ params }: { params: Promise<{ postid: string }> }) {
+  const postId = (await params).postid
+  const tweet: Tweet = await getTweet(postId);
   return (
     <div>
       <div className="flex justify-between items-center mb-3 px-4 py-2">
