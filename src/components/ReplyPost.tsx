@@ -9,6 +9,7 @@ import { RxCross2 } from "react-icons/rx";
 import { TbPhoto } from "react-icons/tb";
 import { useUserSession } from "../../custom-hooks/useUserSession";
 import { useCreateComment } from "../../custom-hooks/useComment";
+import { useGetUser } from "../../custom-hooks/useGetUser";
 
 export default function ReplyPost({ tweetId }: { tweetId: string }) {
   const [reply, setReply] = useState("");
@@ -18,6 +19,7 @@ export default function ReplyPost({ tweetId }: { tweetId: string }) {
   const isDisabled = reply.trim() === "" && !imagePreview;
   const { mutate, isPending } = useCreateComment();
   const { session } = useUserSession();
+   const { loading,  profile, gettingSession } = useGetUser();
   const userId = session?.user.id;
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,6 +56,8 @@ export default function ReplyPost({ tweetId }: { tweetId: string }) {
     );
   };
 
+  
+  if (!profile) return null;
   if (!session) return null;
   return (
     <div
@@ -62,7 +66,7 @@ export default function ReplyPost({ tweetId }: { tweetId: string }) {
       }`}
     >
       <Image
-        src="/images/profile.jpg"
+        src={profile?.avatar_url}
         alt="profile-pic"
         width={500}
         height={500}
