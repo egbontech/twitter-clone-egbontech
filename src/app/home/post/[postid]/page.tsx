@@ -9,11 +9,7 @@ import { Tweet } from "../../../../../types/types";
 import moment from "moment";
 import TweetActions from "@/components/TweetActions";
 
-type PageProps = {
-  params: {
-    postid: string;
-  };
-};
+
 
 const getTweet = async (id: string) => {
   const { error, data } = await supabase
@@ -29,8 +25,9 @@ const getTweet = async (id: string) => {
   return data;
 };
 
-export default async function Page({ params }: PageProps) {
-  const tweet: Tweet = await getTweet(params.postid);
+export default async function Page({ params }: { params: Promise<{ postid: string }> }) {
+  const postId = (await params).postid
+  const tweet: Tweet = await getTweet(postId);
   return (
     <div>
       <div className="flex justify-between items-center mb-3 px-4 py-2">
