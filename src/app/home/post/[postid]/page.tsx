@@ -9,6 +9,12 @@ import { Tweet } from "../../../../../types/types";
 import moment from "moment";
 import TweetActions from "@/components/TweetActions";
 
+type pageProps = {
+  params:{
+    postid:string
+  }
+}
+
 const getTweet = async (id: string) => {
   const { error, data } = await supabase
     .from("tweets")
@@ -23,7 +29,7 @@ const getTweet = async (id: string) => {
   return data;
 };
 
-export default async function Page({ params }: { params: { postid: string } }) {
+export default async function Page({ params }: pageProps) {
   const tweet: Tweet = await getTweet(params.postid);
   return (
     <div>
