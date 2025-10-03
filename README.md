@@ -20,3 +20,7 @@ This project replicates the core features of Twitter including authentication, p
 - **Backend & Database:** Supabase (Postgres + Auth + Storage)  
 - **Deployment:** Vercel  
 
+
+## 🎥 Tutorial  
+Watch the full tutorial on YouTube here:  
+👉 [YouTube Tutorial](https://youtu.be/wUXc67PGmcw)  
